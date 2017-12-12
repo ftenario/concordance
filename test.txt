@@ -1,0 +1,44 @@
+These are the procedure and steps that I undertook to display a review
+of a restaurant that has over 5,000 reviews.
+
+Find and download data:
+I found a dataset on yelp.com where it contains a huge amount of data
+containing business entities, checkins, tips, users and reviews.
+Extract the tar file to a directory.
+
+Finding a business with more than 5,000 reviews:
+To find a business with more than 5,000 reviews, I wrote a python script,
+"business.py" that loads and read the file "yelp_academic_dataset_business.json".
+This file contains the characteristics of businesses reviewed by yelp users.
+It contains the business id, name, address, reviews count and much more.
+I only need to loop over the records and find the json record where the
+review count > 5,000. Luckily, there was only one restaurant that has this
+much reviews. I've written down the business id of this establishment.
+
+Finding all the reviews of this Restaurant:
+With the business id from the previous step, I wrote another python script,
+"fetch_rest.py" where it loads and reads the file "yelp_academic_dataset_review.json".
+The script loops over each line and look for business id with the data from
+the previous step.
+
+if the business id is the same, then append the review from the 'text' field.
+Do this until the end of the json file. Write the data to "reviews.txt"
+
+Sentiment and Analysis of the Reviews:
+I wrote "analysis.py" to do the analysis of the reviews. I used "TextBlob"
+natural language library (i.e. using NLTK) to process each line. Also, each
+line is process further with sentiment polarity to view the negativity or
+positiveness of the line.
+
+Each sentiment value is stored to different python list storage. There are five
+storage depending on the values:
+
+excellent:  1.0 to 0.7
+good:       0.6 to 0.3
+average:    0.2 to -0.2
+below avg:  -0.3 to -0.6
+poor:       -0.7 to -1.0
+
+The result is then encoded into a json data and exported to a file.
+
+Plotting the Result:
